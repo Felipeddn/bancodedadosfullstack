@@ -1,0 +1,129 @@
+-- criação do banco de dados, produtos e seus conteúdos
+create schema fseletro;
+
+-- selecionar o banco de dados
+use fseletro;
+
+-- criando a tabela produtos
+create table produtos(
+id int auto_increment primary key,
+categoria varchar(100),
+descricao varchar(500),
+preco float,
+imagem varchar(100)
+);
+
+-- conferindo a tabela
+select * from produtos;
+
+-- inserindo a coluna (atributo) que faltou
+alter table `fseletro`.`produtos`
+add column `preco_final` datetime after preco;
+
+-- modificando o tipo de dado do atributo (coluna) preco_final
+alter table `fseletro`.`produtos`
+change column `preco_final` `preco_final` float null default null;
+
+-- inserindo dados na tabela 
+-- estava copiando o preco do git e lá esta com virgula, iria dar um problemão rs
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values 
+('geladeiras','Geladeira Frost Free Brastemp Side Inverse 540 litros',6389.00 , 5019.00,'imagens/geladeirabrastemp540.jpeg'); -- 1 estava colocando o separado de milhar e casa decimal
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('geladeiras','Geladeira Frost Free Brastemp Branca 375 litros',2068.60,1910.90,'imagens/geladeirabrastemp375.jpeg'); -- 2
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('geladeiras','Geladeira Frost Free Consul Prata 340 litros',2199.99 ,2069.00,'imagens/geladeiraconsul340.jpeg'); -- 3
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('fogoes','Fogão 4 Bocas Consul Inox com Mesa de Vidro',1299.99,1129.00,'imagens/fogaoconsul4bocas.jpeg'); -- 4 
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('fogoes','Fogão de Piso 4 Bocas Atlas Monaco com Acendimento Automático',609.99,519.70,'imagens/fogaoatlas4bocas.jpeg'); -- 5
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('microondas','Microondas Consul 32 litros Inox 220V',589.99,409.88,'imagens/microondasconsul32.jpeg'); -- 6
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('microondas','Microondas 25L Espelhado Philco 220V',508.70,464.53,'imagens/microondasphilco25l.jpeg'); -- 7
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('microondas','Forno de Microondas Electrolux 20L Branco',459.99,436.05,'imagens/microondasElectrolux.jpeg'); -- 8
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('lavaloucas','Lava-Louça Electrolux Inox com 10 Serviços, 06 Programas de Lavagem e Painel Blue Touch',3599.00,2799.90,'imagens/lavaloucaeletrolux.jpeg'); -- 9
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('lavaloucas','Lava louça Compacta 8 Serviços Branca 127V Brastemp',1970.50,1730.61,'imagens/lavaloucabrastemp.jpeg'); -- 10
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('lavadouraderoupas','Lavadoura de Roupas Brastemp 11 kg com Turbo Performance Branca',1699.99,1214.10,'imagens/lavadourabrastemp.jpeg'); -- 11
+
+insert into `fseletro`.`produtos` (categoria, descricao, preco, preco_final, imagem) 
+values
+('lavadouraderoupas','Lavadoura de Roupas Philco Inverter 12KG',2399.99 ,2179.90,'imagens/lavadouraphilco.jpeg'); -- 12
+-- para valores númericos não usar aspas, para milhar não usar separador, no fim de cada comando ponto e vírgula.
+
+-- consultando produtos 
+select * 
+from fseletro.produtos
+where categoria = "geladeiras";
+
+select * 
+from fseletro.produtos
+where preco < 1000;
+
+select * 
+from fseletro.produtos
+where preco < 500;
+
+select * 
+from fseletro.produtos
+where preco > 500 and preco < 900;
+
+select * 
+from fseletro.produtos
+where preco > 1000 or preco < 900;
+
+select * 
+from fseletro.produtos
+where preco > 1000 and preco < 900;
+
+select * 
+from fseletro.produtos
+where descricao like '%lava%';
+
+select * 
+from fseletro.produtos
+where descricao like '%brastem%';
+
+select * 
+from fseletro.produtos
+where descricao like 'lava_%';
+
+-- criação de tabela de clientes e seus conteúdos
+create table pedidos(
+idpedido int not null auto_increment,
+cliente varchar(255) not null,
+endereco varchar (255),
+telefone int,
+descricao_produto varchar(500),
+preco float,
+quantidade int,
+total_compra float,
+PRIMARY KEY (`idpedido`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+select * from pedidos;
